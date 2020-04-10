@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -21,10 +22,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myimageview = findViewById(R.id.imageView);
-        myfruit = ResourcesCompat.getDrawable(getResources(), R.drawable.apple, null);//import an image
-        bitmapImage = ((BitmapDrawable) myfruit).getBitmap();
-        Bitmap newphoto = invertImage(bitmapImage);
-        myimageview.setImageBitmap(newphoto);
+//        myfruit = ResourcesCompat.getDrawable(getResources(), R.drawable.apple, null);//import an image
+//        bitmapImage = ((BitmapDrawable) myfruit).getBitmap();
+//        Bitmap newphoto = invertImage(bitmapImage);
+//        myimageview.setImageBitmap(newphoto);
+
+        Drawable[] layers = new Drawable[2];
+        layers[0] = ResourcesCompat.getDrawable(getResources(), R.drawable.apple, null);
+        layers[1] = ResourcesCompat.getDrawable(getResources(), R.drawable.image_filter, null);
+        LayerDrawable layerDrawable = new LayerDrawable(layers);
+        myimageview.setImageDrawable(layerDrawable);
     }
 
     private Bitmap invertImage(Bitmap original) {
